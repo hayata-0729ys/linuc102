@@ -1,57 +1,43 @@
 const questions = [
 
 {
+id:1,
 category:"systemd",
 
-question:"systemdでサービスを起動するコマンドは？",
+question:
+"systemdでサービスを起動するコマンドは？",
 
 choices:[
-"systemctl start",
 "service up",
+"systemctl start",
 "runsvc",
-"systemd run"
+"bootctl"
 ],
 
-answer:0,
+answer:1,
 
 explanation:
 "systemctl start サービス名 を利用する。"
 },
 
 {
+id:2,
 category:"ssh",
 
-question:"SSHの標準ポート番号は？",
+question:
+"SSHの標準ポート番号は？",
 
 choices:[
-"22",
 "21",
-"80",
-"443"
+"443",
+"22",
+"25"
 ],
 
-answer:0,
+answer:2,
 
 explanation:
 "SSHはTCP22番ポートを利用する。"
-},
-
-{
-category:"filesystem",
-
-question:"パーミッション変更コマンドは？",
-
-choices:[
-"chmod",
-"chown",
-"umask",
-"passwd"
-],
-
-answer:0,
-
-explanation:
-"chmodはアクセス権を変更する。"
 }
 
 ];
