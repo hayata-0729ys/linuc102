@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>LinuC102学習アプリ</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+<h1>LinuC102学習アプリ</h1>
+</header>
+
+<div class="container">
+
+<div class="card">
+<div class="stats">
+
+<div class="stat">
+問題数: <span id="total">0</span>
+</div>
+
+<div class="stat">
+回答数: <span id="answered">0</span>
+</div>
+
+<div class="stat">
+正解数: <span id="correct">0</span>
+</div>
+
+<div class="stat">
+正答率: <span id="rate">0%</span>
+</div>
+
+</div>
+</div>
+
+<div class="card">
+
+<h2 id="question"></h2>
+
+<div id="choices"></div>
+
+<div id="result"></div>
+
+<div id="explanation"></div>
+
+<button id="nextBtn">
+次の問題
+</button>
+
+</div>
+
+</div>
+
+<script src="questions.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
