@@ -1,64 +1,121 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>LinuC102学習アプリ</title>
-
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinuC102 学習サイト</title>
+    <link rel="stylesheet" href="styles/style.css">
 </head>
-
 <body>
+    <div class="container">
+        <header class="header">
+            <h1>LinuC102 試験対策学習サイト</h1>
+            <p class="subtitle">インタラクティブな学習で合格を目指す</p>
+        </header>
 
-<header>
-<h1>LinuC102学習アプリ</h1>
-</header>
+        <main class="main-content">
+            <!-- メニュー画面 -->
+            <div id="menuScreen" class="screen active">
+                <div class="menu-card">
+                    <h2>学習モードを選択</h2>
+                    <div class="menu-buttons">
+                        <button class="btn btn-primary" onclick="startStudyMode()">
+                            <span class="btn-title">📚 学習モード</span>
+                            <span class="btn-desc">問題をゆっくり学習</span>
+                        </button>
+                        <button class="btn btn-secondary" onclick="startExamMode()">
+                            <span class="btn-title">⏱️ 模擬試験</span>
+                            <span class="btn-desc">時間制限で実力判定</span>
+                        </button>
+                        <button class="btn btn-info" onclick="showStats()">
+                            <span class="btn-title">📊 成績表示</span>
+                            <span class="btn-desc">学習進度を確認</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-<div class="container">
+            <!-- 学習画面 -->
+            <div id="studyScreen" class="screen">
+                <div class="quiz-container">
+                    <div class="quiz-header">
+                        <h2>学習モード</h2>
+                        <div class="progress-info">
+                            <span id="studyQuestionNum" class="question-number">1/10</span>
+                            <div class="progress-bar">
+                                <div id="studyProgressFill" class="progress-fill"></div>
+                            </div>
+                        </div>
+                    </div>
 
-<div class="card">
-<div class="stats">
+                    <div class="quiz-content">
+                        <div id="studyQuestion" class="question-text"></div>
+                        <div id="studyOptions" class="options-container"></div>
+                    </div>
 
-<div class="stat">
-問題数: <span id="total">0</span>
-</div>
+                    <div class="quiz-footer">
+                        <button class="btn btn-small" onclick="prevQuestion('study')">← 前へ</button>
+                        <button class="btn btn-small" onclick="nextQuestion('study')">次へ →</button>
+                        <button class="btn btn-danger btn-small" onclick="backToMenu()">メニューに戻る</button>
+                    </div>
+                </div>
+            </div>
 
-<div class="stat">
-回答数: <span id="answered">0</span>
-</div>
+            <!-- 模擬試験画面 -->
+            <div id="examScreen" class="screen">
+                <div class="quiz-container">
+                    <div class="quiz-header">
+                        <h2>模擬試験</h2>
+                        <div class="exam-info">
+                            <span id="examQuestionNum" class="question-number">1/10</span>
+                            <span id="examTimer" class="timer">制限時間: <span id="timeLeft">30</span>分</span>
+                        </div>
+                    </div>
 
-<div class="stat">
-正解数: <span id="correct">0</span>
-</div>
+                    <div class="quiz-content">
+                        <div id="examQuestion" class="question-text"></div>
+                        <div id="examOptions" class="options-container"></div>
+                    </div>
 
-<div class="stat">
-正答率: <span id="rate">0%</span>
-</div>
+                    <div class="quiz-footer">
+                        <button class="btn btn-small" onclick="prevQuestion('exam')">← 前へ</button>
+                        <button class="btn btn-small" onclick="nextQuestion('exam')">次へ →</button>
+                        <button class="btn btn-success btn-small" onclick="submitExam()">試験を終了</button>
+                        <button class="btn btn-danger btn-small" onclick="backToMenu()">キャンセル</button>
+                    </div>
+                </div>
+            </div>
 
-</div>
-</div>
+            <!-- 結果画面 -->
+            <div id="resultScreen" class="screen">
+                <div class="result-container">
+                    <h2 id="resultTitle"></h2>
+                    <div class="result-score">
+                        <div class="score-display">
+                            <span id="scorePercentage" class="percentage">0%</span>
+                            <span id="scoreText" class="score-text">0/10</span>
+                        </div>
+                    </div>
+                    <div id="resultDetails" class="result-details"></div>
+                    <button class="btn btn-primary" onclick="backToMenu()">メニューに戻る</button>
+                </div>
+            </div>
 
-<div class="card">
+            <!-- 成績表示画面 -->
+            <div id="statsScreen" class="screen">
+                <div class="stats-container">
+                    <h2>学習統計</h2>
+                    <div id="statsContent" class="stats-content"></div>
+                    <button class="btn btn-primary" onclick="backToMenu()">メニューに戻る</button>
+                </div>
+            </div>
+        </main>
 
-<h2 id="question"></h2>
+        <footer class="footer">
+            <p>&copy; 2026 LinuC102 学習サイト | LPI認定試験対策</p>
+        </footer>
+    </div>
 
-<div id="choices"></div>
-
-<div id="result"></div>
-
-<div id="explanation"></div>
-
-<button id="nextBtn">
-次の問題
-</button>
-
-</div>
-
-</div>
-
-<script src="questions.js"></script>
-<script src="app.js"></script>
-
+    <script src="js/app.js"></script>
 </body>
 </html>
