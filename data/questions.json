@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "question": "LinuC102試験のレベルはどのくらいですか?",
+    "options": [
+      "初級 (Foundation)",
+      "中級 (Advanced)",
+      "上級 (Expert)",
+      "最上級 (Master)"
+    ],
+    "correctAnswer": 1,
+    "explanation": "LinuC102はLPI認定試験のレベル2で、中級レベルに相当します。LinuC101(初級)をクリアした次のステップです。"
+  },
+  {
+    "id": 2,
+    "question": "RPMパッケージの依存関係を自動的に解決するツールはどれですか?",
+    "options": [
+      "dpkg",
+      "yum / dnf",
+      "apt",
+      "pacman"
+    ],
+    "correctAnswer": 1,
+    "explanation": "yum (Yellowdog Updater Modified) または dnf (Dandified YUM) は、RPMパッケージの依存関係を自動的に解決し、インストール管理を行うツールです。"
+  },
+  {
+    "id": 3,
+    "question": "systemdでサービスを自動起動させるコマンドは次のどれですか?",
+    "options": [
+      "systemctl enable サービス名",
+      "systemctl start サービス名",
+      "systemctl daemon-reload",
+      "systemctl restart サービス名"
+    ],
+    "correctAnswer": 0,
+    "explanation": "systemctl enableコマンドを使用すると、システム起動時にサービスが自動的に開始されます。startは即座に開始し、restartは再起動します。"
+  },
+  {
+    "id": 4,
+    "question": "TCPとUDPの主な違いはどれですか?",
+    "options": [
+      "TCPはポート番号を使用し、UDPは使用しない",
+      "TCPは接続型で確実な配信を保証し、UDPは非接続型で高速だが配信を保証しない",
+      "UDPはポート番号を使用し、TCPは使用しない",
+      "TCPはIPv4のみで、UDPはIPv6のみ対応"
+    ],
+    "correctAnswer": 1,
+    "explanation": "TCPは接続指向型で、データの確実な配信順序を保証します。UDPはデータグラム型で、配信を保証しませんが高速です。"
+  },
+  {
+    "id": 5,
+    "question": "ファイアウォール管理ツール firewalld で、サービスを永続的に許可するコマンドは?",
+    "options": [
+      "firewall-cmd --add-service=ssh",
+      "firewall-cmd --permanent --add-service=ssh",
+      "firewall-cmd --remove-service=ssh",
+      "firewall-cmd --list-services"
+    ],
+    "correctAnswer": 1,
+    "explanation": "--permanent オプションを使用することで、設定が永続的に保存されます。このオプションなしでは、再起動後に設定がリセットされます。"
+  },
+  {
+    "id": 6,
+    "question": "SELinux のセキュリティコンテキストはどの要素で構成されていますか?",
+    "options": [
+      "user のみ",
+      "user, role, type",
+      "user, role, type, level",
+      "role, type のみ"
+    ],
+    "correctAnswer": 2,
+    "explanation": "SELinux のセキュリティコンテキストは user, role, type, level (オプション) で構成されます。形式は user:role:type:level です。"
+  },
+  {
+    "id": 7,
+    "question": "LVMの階層構造を正しい順序で選んでください。",
+    "options": [
+      "物理ボリューム → 論理ボリューム → ボリュームグループ",
+      "物理ボリューム → ボリュームグループ → 論理ボリューム",
+      "ボリュームグループ → 物理ボリューム → 論理ボリューム",
+      "論理ボリューム → ボリュームグループ → 物理ボリューム"
+    ],
+    "correctAnswer": 1,
+    "explanation": "LVMの階層は、物理ボリューム(PV) → ボリュームグループ(VG) → 論理ボリューム(LV) です。PVから複数のVGを作成し、VGから複数のLVを作成できます。"
+  },
+  {
+    "id": 8,
+    "question": "Namespaceを使用した隔離で正しいのはどれですか?",
+    "options": [
+      "PIDネームスペースはネットワークを隔離する",
+      "NetworkネームスペースはプロセスIDを隔離する",
+      "Mountネームスペースはファイルシステムを隔離する",
+      "Userネームスペースはメモリを隔離する"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Mountネームスペースはファイルシステムを隔離します。PIDは プロセスIDを、Networkはネットワークを、Userはユーザーを隔離します。"
+  },
+  {
+    "id": 9,
+    "question": "OpenSSLでRSA秘密鍵を生成するコマンドは?",
+    "options": [
+      "openssl genrsa -out private.key 2048",
+      "openssl rsa -out private.key 2048",
+      "openssl req -out private.key 2048",
+      "openssl pkcs8 -out private.key 2048"
+    ],
+    "correctAnswer": 0,
+    "explanation": "genrsaサブコマンドは、指定されたサイズ(ビット数)のRSA秘密鍵を生成します。2048ビットは現在の標準的なサイズです。"
+  },
+  {
+    "id": 10,
+    "question": "コンテナイメージのレイヤーキャッシュを無効にしてビルドするdockerコマンドは?",
+    "options": [
+      "docker build -nocache .",
+      "docker build --no-cache .",
+      "docker build --disable-cache .",
+      "docker build --clear-cache ."
+    ],
+    "correctAnswer": 1,
+    "explanation": "--no-cache オプションを使用することで、キャッシュを使用せずにイメージをビルドします。これにより、すべてのレイヤーが新たにビルドされます。"
+  }
+]
