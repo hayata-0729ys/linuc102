@@ -118,5 +118,1085 @@
     ],
     "correctAnswer": 1,
     "explanation": "--no-cache オプションを使用することで、キャッシュを使用せずにイメージをビルドします。これにより、すべてのレイヤーが新たにビルドされます。"
+  },
+  {
+    "id": 11,
+    "question": "ファイルのパーミッションで、所有者が読み書き、グループが読み取り、その他が読み取りする場合の8進数表現は?",
+    "options": [
+      "644",
+      "744",
+      "755",
+      "777"
+    ],
+    "correctAnswer": 0,
+    "explanation": "パーミッション644は、所有者6(rw-)、グループ4(r--)、その他4(r--)を表します。r=4、w=2、x=1です。"
+  },
+  {
+    "id": 12,
+    "question": "chmodコマンドで、ファイルに実行権限を追加するコマンドは?",
+    "options": [
+      "chmod +x ファイル名",
+      "chmod x ファイル名",
+      "chmod 111 ファイル名",
+      "chmod a+x ファイル名"
+    ],
+    "correctAnswer": 0,
+    "explanation": "chmod +xでファイルに実行権限を追加します。aは全ユーザーを指定することもできます。"
+  },
+  {
+    "id": 13,
+    "question": "シンボリックリンクを作成するlnコマンドのオプションは?",
+    "options": [
+      "ln -s",
+      "ln -h",
+      "ln -l",
+      "ln -c"
+    ],
+    "correctAnswer": 0,
+    "explanation": "ln -sでシンボリックリンクを作成します。-sなしでハードリンクが作成されます。"
+  },
+  {
+    "id": 14,
+    "question": "ファイルシステムのマウント情報を確認するコマンドは?",
+    "options": [
+      "mount",
+      "mount -l",
+      "df -h",
+      "すべて正しい"
+    ],
+    "correctAnswer": 3,
+    "explanation": "mountで全マウント情報、mount -lでラベル付きマウント情報、df -hでディスク使用状況を表示します。"
+  },
+  {
+    "id": 15,
+    "question": "ext4ファイルシステムでジャーナリング機能の役割は?",
+    "options": [
+      "ファイルの更新ログを記録する",
+      "ファイルシステムの一貫性を保ち、不正な終了時の復旧を支援する",
+      "ファイルへのアクセスを監視する",
+      "ファイルの暗号化を行う"
+    ],
+    "correctAnswer": 1,
+    "explanation": "ジャーナリング機能は、ファイルシステムの変更を記録し、クラッシュ後の復旧を支援します。"
+  },
+  {
+    "id": 16,
+    "question": "inode番号からファイル名を検索するコマンドは?",
+    "options": [
+      "find . -inum 数字",
+      "ls -i",
+      "stat ファイル名",
+      "file ファイル名"
+    ],
+    "correctAnswer": 0,
+    "explanation": "find . -inum 数字でinode番号からファイルを検索できます。"
+  },
+  {
+    "id": 17,
+    "question": "ディスククォータを設定する前に必要な準備は?",
+    "options": [
+      "quotafsオプション付きでマウント",
+      "quotaチェックを実行",
+      "quota.userファイルを作成",
+      "quotadサービスを起動"
+    ],
+    "correctAnswer": 0,
+    "explanation": "ディスククォータを使用するには、ファイルシステムをusrquota/grpquotaオプション付きでマウントする必要があります。"
+  },
+  {
+    "id": 18,
+    "question": "ディスク使用量をユーザー単位で表示するコマンドは?",
+    "options": [
+      "du -sh ~",
+      "du -s",
+      "df -h",
+      "quota -u ユーザー名"
+    ],
+    "correctAnswer": 0,
+    "explanation": "du -sh ~でホームディレクトリの総容量をサマリー表示します。"
+  },
+  {
+    "id": 19,
+    "question": "findコマンドで、修正時刻が3日以内のファイルを検索するオプションは?",
+    "options": [
+      "-mtime -3",
+      "-mtime 3",
+      "-mtime +3",
+      "-atime -3"
+    ],
+    "correctAnswer": 0,
+    "explanation": "-mtime -3は3日以内に修正されたファイルを検索します。+3は3日以上前です。"
+  },
+  {
+    "id": 20,
+    "question": "grepコマンドで、複数のパターンのいずれかに一致する行を表示するオプションは?",
+    "options": [
+      "-e",
+      "-E",
+      "-v",
+      "-i"
+    ],
+    "correctAnswer": 1,
+    "explanation": "grep -Eで正規表現を使用できます。複数パターンは'pattern1|pattern2'で指定します。"
+  },
+  {
+    "id": 21,
+    "question": "sedコマンドで、最初にマッチした文字列のみを置換するのはどれ?",
+    "options": [
+      "sed 's/old/new/'",
+      "sed 's/old/new/g'",
+      "sed 's/old/new/1'",
+      "sed 's/old/new/?'"
+    ],
+    "correctAnswer": 0,
+    "explanation": "sedのデフォルトは最初の1つのみ置換します。gフラグでグローバル置換します。"
+  },
+  {
+    "id": 22,
+    "question": "awkコマンドで、区切り文字をコロンに指定するオプションは?",
+    "options": [
+      "-F:",
+      "-d:",
+      "-s:",
+      "--delimiter=:"
+    ],
+    "correctAnswer": 0,
+    "explanation": "awk -F:で区切り文字をコロンに設定します。"
+  },
+  {
+    "id": 23,
+    "question": "cutコマンドで、1列目から5列目までを抽出するオプションは?",
+    "options": [
+      "-f 1-5",
+      "-c 1-5",
+      "-F 1-5",
+      "-s 1-5"
+    ],
+    "correctAnswer": 0,
+    "explanation": "cut -f 1-5でフィールド1から5を抽出します。-cは文字位置です。"
+  },
+  {
+    "id": 24,
+    "question": "sortコマンドで、数値としてソートするオプションは?",
+    "options": [
+      "-n",
+      "-t",
+      "-r",
+      "-k"
+    ],
+    "correctAnswer": 0,
+    "explanation": "sort -nで数値ソートを行います。文字列としてのソートとは異なります。"
+  },
+  {
+    "id": 25,
+    "question": "uniqコマンドで、重複行を1行だけ表示するには?",
+    "options": [
+      "uniq",
+      "uniq -d",
+      "uniq -u",
+      "uniq -c"
+    ],
+    "correctAnswer": 0,
+    "explanation": "uniqのデフォルトは重複行を1行だけ表示します。-dは重複している行のみ表示します。"
+  },
+  {
+    "id": 26,
+    "question": "パイプの目的は?",
+    "options": [
+      "前のコマンドの出力を次のコマンドの入力にする",
+      "複数のコマンドを並列実行する",
+      "コマンドの出力をファイルに保存する",
+      "コマンドをバックグラウンドで実行する"
+    ],
+    "correctAnswer": 0,
+    "explanation": "パイプ(|)で、前のコマンドの標準出力を次のコマンドの標準入力に渡します。"
+  },
+  {
+    "id": 27,
+    "question": "リダイレクション>と>>の違いは?",
+    "options": [
+      ">は追記、>>は上書き",
+      ">は上書き、>>は追記",
+      ">は標準エラー、>>は標準出力",
+      "違いはない"
+    ],
+    "correctAnswer": 1,
+    "explanation": ">は上書き(ファイルが存在しれば削除して新規作成)、>>は追記します。"
+  },
+  {
+    "id": 28,
+    "question": "標準エラーを標準出力にリダイレクトするのは?",
+    "options": [
+      "2>&1",
+      "1>&2",
+      ">&2",
+      "&>1"
+    ],
+    "correctAnswer": 0,
+    "explanation": "2>&1で標準エラー(2)を標準出力(1)にリダイレクトします。"
+  },
+  {
+    "id": 29,
+    "question": "here documentを使用する目的は?",
+    "options": [
+      "複数行の入力をコマンドに与える",
+      "ファイルの内容を表示する",
+      "シェルスクリプトを実行する",
+      "リモートコマンドを実行する"
+    ],
+    "correctAnswer": 0,
+    "explanation": "here document(<<)を使うと、複数行のテキストをコマンドの入力に指定できます。"
+  },
+  {
+    "id": 30,
+    "question": "コマンド置換で、現在の日付を変数に格納するのは?",
+    "options": [
+      "date=$(date)",
+      "date=`date`",
+      "date=$(date +%Y-%m-%d)",
+      "すべて正しい"
+    ],
+    "correctAnswer": 3,
+    "explanation": "すべてコマンド置換の正しい方法です。$()またはバッククォートを使用できます。"
+  },
+  {
+    "id": 31,
+    "question": "ユーザーアカウントの情報が保存されているファイルは?",
+    "options": [
+      "/etc/passwd",
+      "/etc/shadow",
+      "/etc/group",
+      "/etc/gshadow"
+    ],
+    "correctAnswer": 0,
+    "explanation": "/etc/passwdにユーザー名、UID、ホームディレクトリなどが保存されます。"
+  },
+  {
+    "id": 32,
+    "question": "/etc/passwdファイルの各フィールドの順序は?",
+    "options": [
+      "ユーザー名:パスワード:UID:GID:コメント:ホーム:シェル",
+      "ユーザー名:GID:UID:パスワード:コメント:ホーム:シェル",
+      "UID:ユーザー名:GID:パスワード:コメント:ホーム:シェル",
+      "ユーザー名:UID:GID:パスワード:ホーム:コメント:シェル"
+    ],
+    "correctAnswer": 0,
+    "explanation": "/etc/passwdの形式は ユーザー名:x:UID:GID:コメント:ホーム:シェル です。"
+  },
+  {
+    "id": 33,
+    "question": "パスワード情報が保存されているファイルは?",
+    "options": [
+      "/etc/passwd",
+      "/etc/shadow",
+      "/etc/group",
+      "/etc/password"
+    ],
+    "correctAnswer": 1,
+    "explanation": "暗号化されたパスワードハッシュは/etc/shadowに保存されます。root権限が必要です。"
+  },
+  {
+    "id": 34,
+    "question": "グループ情報が保存されているファイルは?",
+    "options": [
+      "/etc/passwd",
+      "/etc/shadow",
+      "/etc/group",
+      "/etc/groupshadow"
+    ],
+    "correctAnswer": 2,
+    "explanation": "/etc/groupにグループ名、GID、メンバーが保存されます。"
+  },
+  {
+    "id": 35,
+    "question": "新しいユーザーを作成するコマンドは?",
+    "options": [
+      "useradd",
+      "adduser",
+      "newuser",
+      "usercreat"
+    ],
+    "correctAnswer": 0,
+    "explanation": "useraddコマンドでユーザーを作成します。useradd -m -s /bin/bash ユーザー名"
+  },
+  {
+    "id": 36,
+    "question": "useradd -mオプションの役割は?",
+    "options": [
+      "ホームディレクトリを作成する",
+      "メールボックスを作成する",
+      "パスワードを必須にする",
+      "ユーザーをロックする"
+    ],
+    "correctAnswer": 0,
+    "explanation": "-mオプションでホームディレクトリを自動作成します。"
+  },
+  {
+    "id": 37,
+    "question": "ユーザーのパスワードを設定するコマンドは?",
+    "options": [
+      "passwd",
+      "setpass",
+      "password",
+      "chpass"
+    ],
+    "correctAnswer": 0,
+    "explanation": "passwdコマンドでパスワードを設定/変更します。root権限が必要な場合があります。"
+  },
+  {
+    "id": 38,
+    "question": "ユーザーアカウントを削除するコマンドは?",
+    "options": [
+      "userdel",
+      "deluser",
+      "rmuser",
+      "removeuser"
+    ],
+    "correctAnswer": 0,
+    "explanation": "userdelコマンドでユーザーを削除します。userdel -r でホームディレクトリも削除"
+  },
+  {
+    "id": 39,
+    "question": "ユーザーをグループに追加するコマンドは?",
+    "options": [
+      "usermod -aG",
+      "groupadd",
+      "addgroup",
+      "groupmod"
+    ],
+    "correctAnswer": 0,
+    "explanation": "usermod -aG グループ名 ユーザー名でユーザーをグループに追加します。"
+  },
+  {
+    "id": 40,
+    "question": "アカウントをロック(ログイン禁止)にするコマンドは?",
+    "options": [
+      "passwd -l",
+      "usermod -L",
+      "accountlock",
+      "disablelogin"
+    ],
+    "correctAnswer": 0,
+    "explanation": "passwd -lでアカウントをロックできます。usermod -Lでも可能です。"
+  },
+  {
+    "id": 41,
+    "question": "sudoコマンドの目的は?",
+    "options": [
+      "別のユーザーとしてコマンドを実行する",
+      "複数のコマンドを実行する",
+      "コマンドの履歴を表示する",
+      "バックグラウンドでコマンドを実行する"
+    ],
+    "correctAnswer": 0,
+    "explanation": "sudoで他のユーザー(通常はroot)の権限でコマンドを実行できます。"
+  },
+  {
+    "id": 42,
+    "question": "sudoの設定ファイルは?",
+    "options": [
+      "/etc/sudoers",
+      "/etc/sudo.conf",
+      "/etc/sudo/config",
+      "/root/.sudoers"
+    ],
+    "correctAnswer": 0,
+    "explanation": "/etc/sudoersにsudo権限の設定が保存されています。visudoで編集します。"
+  },
+  {
+    "id": 43,
+    "question": "visudoコマンドの目的は?",
+    "options": [
+      "/etc/sudoersを安全に編集する",
+      "su権限を表示する",
+      "ユーザー権限を確認する",
+      "パスワードを変更する"
+    ],
+    "correctAnswer": 0,
+    "explanation": "visudoで/etc/sudoersを編集すると、構文チェックが行われます。直接編集は避けるべき。"
+  },
+  {
+    "id": 44,
+    "question": "suコマンドで別ユーザーに切り替える場合のコマンドは?",
+    "options": [
+      "su - ユーザー名",
+      "su ユーザー名",
+      "switch ユーザー名",
+      "change ユーザー名"
+    ],
+    "correctAnswer": 0,
+    "explanation": "su - ユーザー名でログインシェルとして切り替わります。-なしでは環境変数が引き継がれます。"
+  },
+  {
+    "id": 45,
+    "question": "現在ログインしているユーザーを確認するコマンドは?",
+    "options": [
+      "whoami",
+      "who",
+      "id",
+      "users"
+    ],
+    "correctAnswer": 0,
+    "explanation": "whoamiで現在のユーザー名を表示します。whoは接続しているユーザーの一覧です。"
+  },
+  {
+    "id": 46,
+    "question": "ユーザーのID情報(UID、GID、グループ)を表示するコマンドは?",
+    "options": [
+      "id",
+      "whoami",
+      "uid",
+      "gid"
+    ],
+    "correctAnswer": 0,
+    "explanation": "idコマンドでUID、GID、所属グループが表示されます。"
+  },
+  {
+    "id": 47,
+    "question": "プロセスの情報を表示するコマンドは?",
+    "options": [
+      "ps",
+      "proc",
+      "pstat",
+      "process"
+    ],
+    "correctAnswer": 0,
+    "explanation": "psコマンドでプロセスの情報が表示されます。ps aux で詳細情報が見られます。"
+  },
+  {
+    "id": 48,
+    "question": "ps auxで表示される各フィールドの順序は?",
+    "options": [
+      "ユーザー PID CPU メモリ VSZ RSS TTY STAT START TIME COMMAND",
+      "PID ユーザー CPU メモリ VSZ RSS TTY STAT START TIME COMMAND",
+      "ユーザー TTY PID CPU メモリ VSZ RSS STAT START TIME COMMAND",
+      "PID CPU メモリ ユーザー TTY VSZ RSS STAT START TIME COMMAND"
+    ],
+    "correctAnswer": 0,
+    "explanation": "ps auxで表示される順序はUSER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMNDです。"
+  },
+  {
+    "id": 49,
+    "question": "特定のプロセスを検索するコマンドは?",
+    "options": [
+      "pgrep",
+      "psgrep",
+      "findpid",
+      "greppid"
+    ],
+    "correctAnswer": 0,
+    "explanation": "pgrepでプロセス名からプロセスIDを検索できます。"
+  },
+  {
+    "id": 50,
+    "question": "プロセスの優先度(nice値)を確認するコマンドは?",
+    "options": [
+      "ps -l",
+      "nice",
+      "priority",
+      "renice"
+    ],
+    "correctAnswer": 0,
+    "explanation": "ps -lでNI(nice値)が表示されます。nice値は-20から19です。"
+  },
+  {
+    "id": 51,
+    "question": "新しいコマンドのnice値を指定して実行するのは?",
+    "options": [
+      "nice -n 値 コマンド",
+      "renice -n 値 PID",
+      "priority -n 値 コマンド",
+      "setpriority 値 コマンド"
+    ],
+    "correctAnswer": 0,
+    "explanation": "nice -n 値 コマンドで新規プロセスのnice値を指定できます。"
+  },
+  {
+    "id": 52,
+    "question": "既に実行中のプロセスの優先度を変更するコマンドは?",
+    "options": [
+      "renice",
+      "nice",
+      "chpriority",
+      "setpriority"
+    ],
+    "correctAnswer": 0,
+    "explanation": "reniceで実行中のプロセスの優先度を変更できます。renice 値 -p PID"
+  },
+  {
+    "id": 53,
+    "question": "プロセスにシグナルを送るコマンドは?",
+    "options": [
+      "kill",
+      "signal",
+      "send",
+      "notify"
+    ],
+    "correctAnswer": 0,
+    "explanation": "killコマンドでプロセスにシグナルを送ります。kill -TERM PIDなど。"
+  },
+  {
+    "id": 54,
+    "question": "プロセスの強制終了に使うシグナルは?",
+    "options": [
+      "SIGKILL (9)",
+      "SIGTERM (15)",
+      "SIGSEGV (11)",
+      "SIGUSR1 (10)"
+    ],
+    "correctAnswer": 0,
+    "explanation": "SIGKILL(9)はプロセスを強制終了させます。SIGTERMは終了要求で、キャッチ可能です。"
+  },
+  {
+    "id": 55,
+    "question": "全プロセスをリアルタイムで監視するコマンドは?",
+    "options": [
+      "top",
+      "htop",
+      "atop",
+      "すべて正しい"
+    ],
+    "correctAnswer": 3,
+    "explanation": "top、htop、atopはすべてプロセス監視ツールです。htopはより高機能です。"
+  },
+  {
+    "id": 56,
+    "question": "バックグラウンドプロセスを一時停止するコマンドは?",
+    "options": [
+      "suspend",
+      "stop",
+      "pause",
+      "bg"
+    ],
+    "correctAnswer": 0,
+    "explanation": "suspendでバックグラウンドプロセスを一時停止します。"
+  },
+  {
+    "id": 57,
+    "question": "バックグラウンドプロセスを再開するコマンドは?",
+    "options": [
+      "bg",
+      "fg",
+      "resume",
+      "continue"
+    ],
+    "correctAnswer": 0,
+    "explanation": "bgでバックグラウンドプロセスを再開します。fgはフォアグラウンドに移行します。"
+  },
+  {
+    "id": 58,
+    "question": "Ctrl+Zの役割は?",
+    "options": [
+      "実行中のプロセスを一時停止",
+      "プロセスを終了",
+      "バックグラウンドに移行",
+      "プロセスを再開"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Ctrl+Zで実行中のプロセスが一時停止され、bgで再開可能です。"
+  },
+  {
+    "id": 59,
+    "question": "Ctrl+Cの役割は?",
+    "options": [
+      "プロセスに割り込みシグナルを送る",
+      "プロセスを一時停止",
+      "クリップボードにコピー",
+      "バックグラウンドに移行"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Ctrl+CはSIGINTシグナルを送り、プロセスを中断させます。"
+  },
+  {
+    "id": 60,
+    "question": "cronジョブの設定ファイルはどこにありますか?",
+    "options": [
+      "/etc/cron.d/ と ~/.crontab",
+      "/var/spool/cron/",
+      "/etc/crontab",
+      "すべて正しい"
+    ],
+    "correctAnswer": 3,
+    "explanation": "/etc/crontab、/etc/cron.d/、/var/spool/cron/すべてcron設定ファイルが置かれます。"
+  },
+  {
+    "id": 61,
+    "question": "ユーザーのcrontabを編集するコマンドは?",
+    "options": [
+      "crontab -e",
+      "crontab -i",
+      "edit crontab",
+      "cron -edit"
+    ],
+    "correctAnswer": 0,
+    "explanation": "crontab -eでユーザーのcrontabが編集できます。"
+  },
+  {
+    "id": 62,
+    "question": "crontabの時間表記で、毎日0時に実行する場合は?",
+    "options": [
+      "0 0 * * *",
+      "0 * * * *",
+      "* 0 * * *",
+      "* * 0 * *"
+    ],
+    "correctAnswer": 0,
+    "explanation": "crontabの形式は分 時 日 月 曜日です。0 0 * * *は毎日0時です。"
+  },
+  {
+    "id": 63,
+    "question": "crontabで毎週月曜日の午前3時に実行する場合は?",
+    "options": [
+      "0 3 * * 1",
+      "0 3 * * 2",
+      "0 3 1 * *",
+      "3 0 * * 1"
+    ],
+    "correctAnswer": 0,
+    "explanation": "曜日は0=日、1=月、2=火...です。0 3 * * 1で毎週月曜日3時です。"
+  },
+  {
+    "id": 64,
+    "question": "crontabで毎月1日に実行する場合は?",
+    "options": [
+      "0 0 1 * *",
+      "0 0 * 1 *",
+      "0 0 * * 1",
+      "1 0 * * *"
+    ],
+    "correctAnswer": 0,
+    "explanation": "0 0 1 * *で毎月1日の0時です。"
+  },
+  {
+    "id": 65,
+    "question": "atコマンドの用途は?",
+    "options": [
+      "特定の時刻に1回限りコマンドを実行",
+      "定期的にコマンドを実行",
+      "複数のコマンドを実行",
+      "バックグラウンドでコマンドを実行"
+    ],
+    "correctAnswer": 0,
+    "explanation": "atで特定の時刻に1回限りコマンドを実行します。cronは定期実行です。"
+  },
+  {
+    "id": 66,
+    "question": "atコマンドで明日午前10時にコマンドを実行するのは?",
+    "options": [
+      "at 10:00 tomorrow",
+      "at 10:00 +1 day",
+      "at tomorrow 10:00",
+      "at +24h"
+    ],
+    "correctAnswer": 0,
+    "explanation": "at 10:00 tomorrowで明日午前10時に実行します。"
+  },
+  {
+    "id": 67,
+    "question": "登録したatジョブを表示するコマンドは?",
+    "options": [
+      "atq",
+      "at -l",
+      "atr",
+      "ats"
+    ],
+    "correctAnswer": 0,
+    "explanation": "atqで登録済みのジョブを表示します。atq または at -l"
+  },
+  {
+    "id": 68,
+    "question": "atジョブをキャンセルするコマンドは?",
+    "options": [
+      "atrm",
+      "at -r",
+      "at -d",
+      "atdelete"
+    ],
+    "correctAnswer": 0,
+    "explanation": "atrmでatジョブをキャンセルできます。atrm ジョブID"
+  },
+  {
+    "id": 69,
+    "question": "anacronコマンドの用途は?",
+    "options": [
+      "電源OFF時も実行すべき定期ジョブを処理",
+      "リアルタイムでプロセスを監視",
+      "ディスク容量を監視",
+      "ネットワークを監視"
+    ],
+    "correctAnswer": 0,
+    "explanation": "anacronは、コンピュータがOFFだった期間のcronジョブを実行します。"
+  },
+  {
+    "id": 70,
+    "question": "systemdタイマーユニットのファイル拡張子は?",
+    "options": [
+      ".timer",
+      ".cron",
+      ".schedule",
+      ".job"
+    ],
+    "correctAnswer": 0,
+    "explanation": "systemdタイマーは.timerファイルで定義されます。"
+  },
+  {
+    "id": 71,
+    "question": "SSHの標準ポート番号は?",
+    "options": [
+      "22",
+      "23",
+      "21",
+      "3389"
+    ],
+    "correctAnswer": 0,
+    "explanation": "SSHの標準ポートは22です。Telnetは23、FTPは21です。"
+  },
+  {
+    "id": 72,
+    "question": "SSHの設定ファイルは?",
+    "options": [
+      "/etc/ssh/sshd_config",
+      "/etc/sshd.conf",
+      "/etc/ssh.conf",
+      "/etc/sshconfig"
+    ],
+    "correctAnswer": 0,
+    "explanation": "/etc/ssh/sshd_configがSSHサーバーの設定ファイルです。"
+  },
+  {
+    "id": 73,
+    "question": "公開鍵認証を使うSSH接続のコマンドは?",
+    "options": [
+      "ssh -i キーファイル ユーザー@ホスト",
+      "ssh -k キーファイル ユーザー@ホスト",
+      "ssh -p キーファイル ユーザー@ホスト",
+      "ssh -f キーファイル ユーザー@ホスト"
+    ],
+    "correctAnswer": 0,
+    "explanation": "ssh -i で秘密鍵ファイルを指定します。"
+  },
+  {
+    "id": 74,
+    "question": "SSHクライアントの設定ファイルの場所は?",
+    "options": [
+      "~/.ssh/config",
+      "~/.sshconfig",
+      "/etc/ssh/client_config",
+      "~/.config/ssh"
+    ],
+    "correctAnswer": 0,
+    "explanation": "~/.ssh/configでSSHクライアント設定を行います。"
+  },
+  {
+    "id": 75,
+    "question": "ssh-keygenコマンドで鍵ペアを生成する際、RSA鍵を指定するオプションは?",
+    "options": [
+      "-t rsa",
+      "-t RSA",
+      "-alg rsa",
+      "-key rsa"
+    ],
+    "correctAnswer": 0,
+    "explanation": "ssh-keygen -t rsaでRSA鍵ペアを生成します。"
+  },
+  {
+    "id": 76,
+    "question": "scpコマンドでリモートファイルをローカルにコピーするのは?",
+    "options": [
+      "scp ユーザー@ホスト:ファイル .",
+      "scp . ユーザー@ホスト:ファイル",
+      "scp ファイル ユーザー@ホスト:",
+      "scp --remote ユーザー@ホスト ファイル"
+    ],
+    "correctAnswer": 0,
+    "explanation": "scp リモートパス ローカルパス でコピーできます。"
+  },
+  {
+    "id": 77,
+    "question": "sftpコマンドの用途は?",
+    "options": [
+      "SSHで安全にファイル転送",
+      "高速ファイル転送",
+      "バッチファイル転送",
+      "暗号化通信"
+    ],
+    "correctAnswer": 0,
+    "explanation": "sftpはSSH上でセキュアなファイル転送を行います。"
+  },
+  {
+    "id": 78,
+    "question": "X11フォワーディングでSSH接続するオプションは?",
+    "options": [
+      "ssh -X",
+      "ssh -x",
+      "ssh -display",
+      "ssh -forward"
+    ],
+    "correctAnswer": 0,
+    "explanation": "ssh -Xで信頼できるX11フォワーディングを有効にします。"
+  },
+  {
+    "id": 79,
+    "question": "SSHのパスフレーズを記憶するプログラムは?",
+    "options": [
+      "ssh-agent",
+      "ssh-cache",
+      "ssh-memory",
+      "ssh-store"
+    ],
+    "correctAnswer": 0,
+    "explanation": "ssh-agentがパスフレーズを記憶し、毎回入力を避けられます。"
+  },
+  {
+    "id": 80,
+    "question": "ポートフォワーディング(ローカル)でSSH接続するオプションは?",
+    "options": [
+      "ssh -L ローカルポート:localhost:リモートポート",
+      "ssh -R ローカルポート:localhost:リモートポート",
+      "ssh -F ローカルポート:localhost:リモートポート",
+      "ssh -D ローカルポート:localhost:リモートポート"
+    ],
+    "correctAnswer": 0,
+    "explanation": "ssh -L でローカルポートをリモートポートにフォワーディングします。"
+  },
+  {
+    "id": 81,
+    "question": "HTTPSの標準ポート番号は?",
+    "options": [
+      "443",
+      "80",
+      "8443",
+      "3443"
+    ],
+    "correctAnswer": 0,
+    "explanation": "HTTPS(HTTP Secure)の標準ポートは443です。HTTPは80です。"
+  },
+  {
+    "id": 82,
+    "question": "DNSの標準ポート番号は?",
+    "options": [
+      "53",
+      "25",
+      "110",
+      "143"
+    ],
+    "correctAnswer": 0,
+    "explanation": "DNSの標準ポートは53です。"
+  },
+  {
+    "id": 83,
+    "question": "SMTPの標準ポート番号は?",
+    "options": [
+      "25",
+      "110",
+      "143",
+      "465"
+    ],
+    "correctAnswer": 0,
+    "explanation": "SMTP(メール送信)の標準ポートは25です。POP3は110、IMAP4は143です。"
+  },
+  {
+    "id": 84,
+    "question": "POP3の標準ポート番号は?",
+    "options": [
+      "110",
+      "25",
+      "143",
+      "220"
+    ],
+    "correctAnswer": 0,
+    "explanation": "POP3(メール受信)の標準ポートは110です。"
+  },
+  {
+    "id": 85,
+    "question": "IMAP4の標準ポート番号は?",
+    "options": [
+      "143",
+      "25",
+      "110",
+      "220"
+    ],
+    "correctAnswer": 0,
+    "explanation": "IMAP4(メール受信)の標準ポートは143です。"
+  },
+  {
+    "id": 86,
+    "question": "FTPの標準ポート番号は?",
+    "options": [
+      "21",
+      "22",
+      "23",
+      "25"
+    ],
+    "correctAnswer": 0,
+    "explanation": "FTP(ファイル転送)の標準ポートは21です。"
+  },
+  {
+    "id": 87,
+    "question": "Telnetの標準ポート番号は?",
+    "options": [
+      "23",
+      "21",
+      "22",
+      "25"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Telnetの標準ポートは23です。SSHが推奨されます。"
+  },
+  {
+    "id": 88,
+    "question": "DHCPの標準ポート番号は?",
+    "options": [
+      "67/68",
+      "53",
+      "69",
+      "161"
+    ],
+    "correctAnswer": 0,
+    "explanation": "DHCPはUDPポート67(サーバー)と68(クライアント)を使用します。"
+  },
+  {
+    "id": 89,
+    "question": "NFSの標準ポート番号は?",
+    "options": [
+      "2049",
+      "139",
+      "445",
+      "111"
+    ],
+    "correctAnswer": 0,
+    "explanation": "NFSの標準ポートは2049です。"
+  },
+  {
+    "id": 90,
+    "question": "SMBの標準ポート番号は?",
+    "options": [
+      "445",
+      "139",
+      "135",
+      "137"
+    ],
+    "correctAnswer": 0,
+    "explanation": "SMB(Samba)の標準ポートは445です。NetBIOSは139です。"
+  },
+  {
+    "id": 91,
+    "question": "IPアドレスの構成を確認するコマンドは?",
+    "options": [
+      "ifconfig または ip addr",
+      "inet",
+      "netstat",
+      "route"
+    ],
+    "correctAnswer": 0,
+    "explanation": "ifconfigまたはip addrでIPアドレスやネットマスクが確認できます。"
+  },
+  {
+    "id": 92,
+    "question": "ネットワーク設定ファイル(RHEL系)はどこにありますか?",
+    "options": [
+      "/etc/sysconfig/network-scripts/",
+      "/etc/network/interfaces",
+      "/etc/networking.conf",
+      "/etc/net.conf"
+    ],
+    "correctAnswer": 0,
+    "explanation": "RHEL/CentOSでは/etc/sysconfig/network-scripts/にifcfg-*ファイルがあります。"
+  },
+  {
+    "id": 93,
+    "question": "ネットワーク設定ファイル(Debian系)はどこにありますか?",
+    "options": [
+      "/etc/network/interfaces",
+      "/etc/sysconfig/network",
+      "/etc/net.conf",
+      "/etc/interfaces.conf"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Debian/Ubuntuでは/etc/network/interfacesに設定があります。"
+  },
+  {
+    "id": 94,
+    "question": "DNSサーバーのアドレスが記載されているファイルは?",
+    "options": [
+      "/etc/resolv.conf",
+      "/etc/nsswitch.conf",
+      "/etc/hosts",
+      "/etc/dns.conf"
+    ],
+    "correctAnswer": 0,
+    "explanation": "/etc/resolv.confにDNSサーバーアドレスが記載されます。"
+  },
+  {
+    "id": 95,
+    "question": "ホスト名とIPアドレスのマッピングはどこに記載されていますか?",
+    "options": [
+      "/etc/hosts",
+      "/etc/hostname",
+      "/etc/resolv.conf",
+      "/etc/networks"
+    ],
+    "correctAnswer": 0,
+    "explanation": "/etc/hostsにローカルのホスト名とIPアドレスが記載されます。"
+  },
+  {
+    "id": 96,
+    "question": "ホスト名を表示するコマンドは?",
+    "options": [
+      "hostname",
+      "hostinfo",
+      "uname -n",
+      "すべて正しい"
+    ],
+    "correctAnswer": 3,
+    "explanation": "hostname、hostinfo、uname -nはすべてホスト名を表示します。"
+  },
+  {
+    "id": 97,
+    "question": "ホスト名を変更するコマンドは?",
+    "options": [
+      "hostnamectl set-hostname",
+      "hostname 新しいホスト名",
+      "sethostname",
+      "hname -c"
+    ],
+    "correctAnswer": 0,
+    "explanation": "hostnamectl set-hostname で永続的にホスト名を変更します。"
+  },
+  {
+    "id": 98,
+    "question": "ドメイン名を表示するコマンドは?",
+    "options": [
+      "domainname",
+      "hostname -d",
+      "dnsdomainname",
+      "すべて正しい"
+    ],
+    "correctAnswer": 3,
+    "explanation": "domainname、hostname -d、dnsnameはドメイン名を表示します。"
+  },
+  {
+    "id": 99,
+    "question": "ネットワーク到達可能性をテストするコマンドは?",
+    "options": [
+      "ping",
+      "traceroute",
+      "netstat",
+      "ifconfig"
+    ],
+    "correctAnswer": 0,
+    "explanation": "pingでネットワーク到達性をテストします。"
+  },
+  {
+    "id": 100,
+    "question": "ルーティングテーブルを表示するコマンドは?",
+    "options": [
+      "route または ip route",
+      "traceroute",
+      "netstat -r",
+      "すべて正しい"
+    ],
+    "correctAnswer": 3,
+    "explanation": "route、ip route、netstat -rはすべてルーティングテーブルを表示します。"
   }
 ]
