@@ -103,6 +103,45 @@ body {
     gap: 1rem;
 }
 
+/* カテゴリー選択画面 */
+.category-container {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.category-content h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+}
+
+.category-buttons {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.btn-category {
+    padding: 1rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: none;
+    font-weight: 500;
+}
+
+.btn-category:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+}
+
 /* クイズコンテナ */
 .quiz-container {
     background: white;
@@ -221,9 +260,17 @@ body {
     background: rgba(16, 185, 129, 0.1);
 }
 
-.option.incorrect {
+.option.wrong {
     border-color: var(--danger-color);
     background: rgba(239, 68, 68, 0.1);
+}
+
+.explanation {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: #f0f9ff;
+    border-left: 4px solid #0ea5e9;
+    border-radius: 4px;
 }
 
 /* ボタン */
@@ -443,7 +490,8 @@ body {
     .quiz-container,
     .menu-card,
     .result-container,
-    .stats-container {
+    .stats-container,
+    .category-container {
         padding: 1.5rem;
     }
 
