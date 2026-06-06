@@ -1,10 +1,12 @@
 // グローバル変数
 let questions = [];
+let allQuestions = []; // 全問題を保持
 let currentQuestionIndex = 0;
 let currentMode = null; // 'study' or 'exam'
 let userAnswers = {};
 let examTimer = null;
 let examTimeLeft = 0;
+let selectedCategory = null; // 選択された分野
 const EXAM_TIME_LIMIT = 30 * 60; // 30分（秒）
 
 // 初期化
@@ -17,7 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
 async function loadQuestions() {
     try {
         const response = await fetch('data/questions.json');
-        questions = await response.json();
+        allQuestions = await response.json();
+        questions = allQuestions;
     } catch (error) {
         console.error('問題データの読み込みに失敗しました:', error);
         alert('問題データの読み込みに失敗しました。ページを再読み込みしてください。');
@@ -34,6 +37,28 @@ function initializeStats() {
             lastScores: []
         }));
     }
+}
+
+// ====== カテゴリー管理 ======
+
+function getCategories() {
+    // 全問題からカテゴリーを抽出
+    const categories = {};
+    allQuestions.forEach(q => {
+        const cat = q.category || '全体';
+        if (!categories[cat]) {
+            categories[cat] = 0;
+        }
+        categories[cat]++;
+    });
+    return categories;
+}
+
+function filterQuestionsByCategory(category) {
+    if (category === '全体' || category === null) {
+        return allQuestions;
+    }
+    return allQuestions.filter(q => (q.category || '全体') === category);
 }
 
 // ====== スクリーン遷移 ======
@@ -53,20 +78,82 @@ function backToMenu() {
     }
     currentQuestionIndex = 0;
     userAnswers = {};
+    selectedCategory = null;
 }
 
 // ====== 学習モード ======
 
 function startStudyMode() {
-    if (questions.length === 0) {
+    if (allQuestions.length === 0) {
         alert('問題データが読み込まれていません。ページを再読み込みしてください。');
         return;
     }
-    currentMode = 'study';
+    
+    // カテゴリー選択画面を表示
+    const categories = getCategories();
+    showScreen('categoryScreen');
+    displayCategories(categories, 'study');
+}
+
+function startExamMode() {
+    if (allQuestions.length === 0) {
+        alert('問題データが読み込まれていません。ページを再読み込みしてください。');
+        return;
+    }
+    
+    // カテゴリー選択画面を表示
+    const categories = getCategories();
+    showScreen('categoryScreen');
+    displayCategories(categories, 'exam');
+}
+
+function displayCategories(categories, mode) {
+    const categoryContent = document.getElementById('categoryContent');
+    categoryContent.innerHTML = '';
+    
+    const title = document.createElement('h2');
+    title.textContent = mode === 'study' ? '学習する分野を選択' : '試験の分野を選択';
+    categoryContent.appendChild(title);
+    
+    const buttonContainer = document.createElement('div');
+    buttonContainer.className = 'category-buttons';
+    
+    // 全体ボタン
+    const allBtn = document.createElement('button');
+    allBtn.className = 'btn btn-category';
+    allBtn.textContent = `📚 全体 (${Object.values(categories).reduce((a, b) => a + b, 0)}問)`;
+    allBtn.onclick = () => startWithCategory('全体', mode);
+    buttonContainer.appendChild(allBtn);
+    
+    // カテゴリーごとのボタン
+    Object.entries(categories).forEach(([category, count]) => {
+        const btn = document.createElement('button');
+        btn.className = 'btn btn-category';
+        btn.textContent = `📖 ${category} (${count}問)`;
+        btn.onclick = () => startWithCategory(category, mode);
+        buttonContainer.appendChild(btn);
+    });
+    
+    categoryContent.appendChild(buttonContainer);
+}
+
+function startWithCategory(category, mode) {
+    selectedCategory = category;
+    questions = filterQuestionsByCategory(category);
     currentQuestionIndex = 0;
     userAnswers = {};
-    showScreen('studyScreen');
-    displayQuestion('study');
+    
+    if (mode === 'study') {
+        currentMode = 'study';
+        showScreen('studyScreen');
+        displayQuestion('study');
+    } else {
+        currentMode = 'exam';
+        examTimeLeft = EXAM_TIME_LIMIT;
+        showScreen('examScreen');
+        displayQuestion('exam');
+        startExamTimer();
+    }
 }
 
 function nextQuestion(mode) {
@@ -93,7 +180,9 @@ function displayQuestion(mode) {
     
     // 進捗バー
     const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
-    document.getElementById(`${modePrefix}ProgressFill`).style.width = progress + '%';
+    if (document.getElementById(`${modePrefix}ProgressFill`)) {
+        document.getElementById(`${modePrefix}ProgressFill`).style.width = progress + '%';
+    }
 
     // 問題文
     document.getElementById(`${modePrefix}Question`).textContent = question.question;
@@ -107,20 +196,14 @@ function displayQuestion(mode) {
         optionDiv.className = 'option';
         optionDiv.textContent = option;
 
-        // 学習モードでは前の答えを記憶
-        if (mode === 'study' && userAnswers[currentQuestionIndex] !== undefined) {
+        // 前の答えを記憶していれば選択状態を復元
+        if (userAnswers[currentQuestionIndex] !== undefined) {
             if (index === userAnswers[currentQuestionIndex]) {
                 optionDiv.classList.add('selected');
-            }
-            if (index === question.correctAnswer) {
-                optionDiv.classList.add('correct');
-            }
-        }
-
-        // 模擬試験では選択状態を記憶
-        if (mode === 'exam' && userAnswers[currentQuestionIndex] !== undefined) {
-            if (index === userAnswers[currentQuestionIndex]) {
-                optionDiv.classList.add('selected');
+                // 学習モードでは正解を表示
+                if (mode === 'study' && index === question.correctAnswer) {
+                    optionDiv.classList.add('correct');
+                }
             }
         }
 
@@ -131,23 +214,36 @@ function displayQuestion(mode) {
         optionsContainer.appendChild(optionDiv);
     });
 
-    // 説明文の表示（学習モードのみ）
-    if (mode === 'study') {
-        const explanationDiv = document.createElement('div');
-        explanationDiv.style.marginTop = '1.5rem';
-        explanationDiv.style.padding = '1rem';
-        explanationDiv.style.background = '#f0f9ff';
-        explanationDiv.style.borderLeft = '4px solid #0ea5e9';
-        explanationDiv.style.borderRadius = '4px';
-        
-        const correctAnswer = questions[currentQuestionIndex].options[questions[currentQuestionIndex].correctAnswer];
-        explanationDiv.innerHTML = `
-            <strong>正解: ${correctAnswer}</strong><br>
-            <p style="margin-top: 0.5rem; color: #1f2937;">${question.explanation}</p>
-        `;
-        
-        optionsContainer.parentElement.appendChild(explanationDiv);
+    // 説明文の表示（学習モードのみ、選択肢を選んだ場合）
+    if (mode === 'study' && userAnswers[currentQuestionIndex] !== undefined) {
+        displayExplanation(mode, question);
     }
+}
+
+function displayExplanation(mode, question) {
+    const optionsContainer = document.getElementById(`${mode}Options`);
+    const explanationDiv = document.createElement('div');
+    explanationDiv.className = 'explanation';
+    explanationDiv.style.marginTop = '1.5rem';
+    explanationDiv.style.padding = '1rem';
+    explanationDiv.style.background = '#f0f9ff';
+    explanationDiv.style.borderLeft = '4px solid #0ea5e9';
+    explanationDiv.style.borderRadius = '4px';
+    
+    const correctAnswer = question.options[question.correctAnswer];
+    const userAnswer = question.options[userAnswers[currentQuestionIndex]];
+    const isCorrect = userAnswers[currentQuestionIndex] === question.correctAnswer;
+    
+    explanationDiv.innerHTML = `
+        <strong style="${isCorrect ? 'color: #10b981;' : 'color: #ef4444;'}">
+            ${isCorrect ? '✓ 正解！' : '✗ 不正解'}
+        </strong><br>
+        <strong>正解: ${correctAnswer}</strong><br>
+        ${!isCorrect ? `<span style="color: #ef4444;">あなたの回答: ${userAnswer}</span><br>` : ''}
+        <p style="margin-top: 0.5rem; color: #1f2937;">${question.explanation}</p>
+    `;
+    
+    optionsContainer.parentElement.appendChild(explanationDiv);
 }
 
 function selectAnswer(mode, optionIndex) {
@@ -156,28 +252,37 @@ function selectAnswer(mode, optionIndex) {
     // UIに反映
     const optionDivs = document.querySelectorAll(`#${mode}Options .option`);
     optionDivs.forEach((div, index) => {
-        div.classList.remove('selected');
+        div.classList.remove('selected', 'correct', 'wrong');
         if (index === optionIndex) {
             div.classList.add('selected');
+            // 学習モードで正解/不正解を表示
+            if (mode === 'study') {
+                const question = questions[currentQuestionIndex];
+                if (index === question.correctAnswer) {
+                    div.classList.add('correct');
+                } else {
+                    div.classList.add('wrong');
+                }
+            }
         }
     });
+    
+    // 学習モード時に説明を表示
+    if (mode === 'study') {
+        // 既存の説明を削除
+        const optionsContainer = document.getElementById(`${mode}Options`);
+        const oldExplanation = optionsContainer.parentElement.querySelector('.explanation');
+        if (oldExplanation) {
+            oldExplanation.remove();
+        }
+        
+        // 新しい説明を追加
+        const question = questions[currentQuestionIndex];
+        displayExplanation(mode, question);
+    }
 }
 
 // ====== 模擬試験モード ======
-
-function startExamMode() {
-    if (questions.length === 0) {
-        alert('問題データが読み込まれていません。ページを再読み込みしてください。');
-        return;
-    }
-    currentMode = 'exam';
-    currentQuestionIndex = 0;
-    userAnswers = {};
-    examTimeLeft = EXAM_TIME_LIMIT;
-    showScreen('examScreen');
-    displayQuestion('exam');
-    startExamTimer();
-}
 
 function startExamTimer() {
     updateTimerDisplay();
@@ -196,7 +301,7 @@ function updateTimerDisplay() {
     const minutes = Math.floor(examTimeLeft / 60);
     const seconds = examTimeLeft % 60;
     const timerElement = document.getElementById('timeLeft');
-    timerElement.textContent = String(minutes).padStart(2, '0');
+    timerElement.textContent = String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
 
     // 残り時間が少ない場合は警告
     if (examTimeLeft < 300) { // 5分以下
@@ -240,7 +345,8 @@ function saveExamScore(percentage, correctCount) {
         date: new Date().toLocaleDateString('ja-JP'),
         percentage: percentage,
         correct: correctCount,
-        total: questions.length
+        total: questions.length,
+        category: selectedCategory || '全体'
     });
 
     // 最新10件の記録を保持
@@ -331,7 +437,7 @@ function showStats() {
         stats.lastScores.slice().reverse().forEach((score, index) => {
             html += `
                 <div class="stat-item">
-                    <span class="stat-label">${score.date}</span>
+                    <span class="stat-label">${score.date}${score.category ? ' (' + score.category + ')' : ''}</span>
                     <span class="stat-value">${score.percentage}% (${score.correct}/${score.total})</span>
                 </div>
             `;
